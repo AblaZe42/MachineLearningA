@@ -53,10 +53,12 @@ class GTSRBTrafficSigns(Dataset):
         image = transforms.RandomAffine((-5,5))(image)
         image = transforms.RandomCrop((self.img_width_crop, self.img_height_crop))(image)
         image = transforms.ColorJitter(0.8, contrast = 0.4)(image)
+        image = transforms.RandomPerspective(0.6, 0.4)(image)
         if label in [11, 12, 13, 17, 18, 26, 30, 35]:
           image = transforms.RandomHorizontalFlip(p=0.5)(image)
       else:
         image = transforms.CenterCrop((self.img_width_crop, self.img_height_crop))(image)
+
 
       image = transforms.ToTensor()(image)
 
